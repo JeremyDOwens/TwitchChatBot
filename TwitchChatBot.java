@@ -56,6 +56,10 @@ public class TwitchChatBot implements AutoCloseable {
  * @throws IOException If cannot connect
  */
     public void connect() throws IOException{
+        if (chan != null) {
+            chan.close();
+            chan = null;
+        }
         chan = SocketChannel.open();
         chan.configureBlocking(false);
         chan.connect(new InetSocketAddress("irc.twitch.tv", 6667));
